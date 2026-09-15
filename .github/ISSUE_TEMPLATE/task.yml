@@ -1,0 +1,17 @@
+name: Task
+about: 工程或运营任务
+title: "[Task] "
+labels: [task]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: 任务目标
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of Done
+    validations:
+      required: true

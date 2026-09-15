@@ -1,0 +1,24 @@
+name: Feature
+about: 新功能或玩法需求
+title: "[Feature] "
+labels: [feature]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题/目标
+      description: 为什么要做这项功能？
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 完成后必须满足什么？
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 范围
+      description: 明确做什么和不做什么。

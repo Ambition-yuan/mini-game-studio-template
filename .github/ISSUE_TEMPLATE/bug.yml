@@ -1,0 +1,28 @@
+name: Bug
+about: 缺陷报告
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: repro
+    attributes:
+      label: 复现步骤
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: 平台/设备
+      placeholder: 微信 Android / 抖音 Android / iPhone

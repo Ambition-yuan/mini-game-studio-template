@@ -1,33 +1,27 @@
 # Mini Game Studio Template
 
-用于在 Codex 协助下，从 0 到 1 完成第一款小游戏，并逐步沉淀为可复制的小游戏生产模板。
+用于以 **Codex + Cocos Creator + TypeScript + GitHub** 的方式，从 0 到 1 完成微信小游戏与抖音小游戏，并逐步沉淀成可复制的生产模板。
 
-## 当前目标
+## 目标
 
-- 引擎：Cocos Creator 3.8.x
-- 语言：TypeScript
-- 平台：微信小游戏、抖音小游戏
-- 开发方式：Codex 辅助 + 人工产品决策 + 真机验证
-- 第一款产品原则：小而完整、短局、低后端依赖、先上线再扩展
+第一款产品完成完整闭环：
 
-## 文档入口
+创意 → 产品讨论 → GDD → 技术设计 → Graybox 原型 → 正式开发 → 素材/UI/音频 → 平台能力 → QA → 性能/包体 → 资质/合规 → 双平台提审 → 上线 → 数据验证。
 
-1. `AGENTS.md`：长期规则，Codex 每次工作前应读取。
-2. `docs/product-brief.md`：产品一句话定义和边界。
-3. `docs/gdd.md`：完整游戏设计。
-4. `docs/roadmap.md`：阶段计划和当前进度。
-5. `docs/technical-design.md`：技术架构与平台适配。
-6. `docs/qa-checklist.md`：测试清单。
-7. `docs/release-checklist.md`：发布前清单。
-8. `docs/ops-and-metrics.md`：上线后的数据指标与迭代方式。
-9. `docs/changelog.md`：版本变更记录。
-10. `docs/decisions/`：重要决策记录。
+## 当前阶段
 
-## 开工方式
+以 `docs/status.md` 为准。
 
-把本仓库放入 GitHub 后，在 Codex 中打开仓库根目录，先发送：
+## Codex 工作入口
 
-> 阅读 `AGENTS.md`、`README.md` 和 `docs/roadmap.md`。先只做项目现状检查，不修改代码。输出当前阶段、已满足的前置条件、缺失项、下一项最小任务和验证方法。
+第一次打开仓库时：
+
+1. 读取根目录 `AGENTS.md`。
+2. 读取与当前任务相关的 Skill。
+3. 读取 `docs/status.md` 和相关项目文档。
+4. 先做最小可验证工作，再修改代码。
+
+推荐第一条指令见 `CODEX_START.md`。
 
 ## 目录
 
@@ -35,7 +29,9 @@
 .
 ├── AGENTS.md
 ├── README.md
+├── CODEX_START.md
 ├── docs/
+│   ├── status.md
 │   ├── product-brief.md
 │   ├── gdd.md
 │   ├── roadmap.md
@@ -46,8 +42,17 @@
 │   ├── changelog.md
 │   ├── decisions/
 │   └── tasks/
-├── .codex/
-│   └── skills/
+├── .codex/skills/
+│   ├── product-design/
+│   ├── cocos-development/
+│   ├── game-art/
+│   ├── platform-wechat/
+│   ├── platform-douyin/
+│   ├── qa-testing/
+│   └── release/
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE/
 ├── assets/
 ├── project/
 └── scripts/
@@ -55,4 +60,7 @@
 
 ## 原则
 
-规则与任务分离；任务与代码分离；平台差异集中封装；所有关键结论尽量有证据；所有发布动作保留人工确认。
+- 一个仓库一个真实项目事实来源。
+- AGENTS 定长期规则，Skills 定可复用工作流，Docs 记项目事实，GitHub Issues 管任务。
+- 产品重大决定由人确认；代码和机械性工作尽量让 Codex 自动完成。
+- 平台发布动作保留人工确认。

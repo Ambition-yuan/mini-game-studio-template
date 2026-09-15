@@ -1,33 +1,16 @@
-# Decision Record
+# Decision: <title>
 
-- 日期：YYYY-MM-DD
-- 状态：PROPOSED / ACCEPTED / SUPERSEDED
-- 决策人：
+日期：YYYY-MM-DD
+状态：Proposed / Accepted / Superseded
 
 ## 背景
 
-为什么需要做这个决定？
-
 ## 选项
 
-### A
-
-### B
-
-### C
-
-## 决定
-
-TBD
+## 决策
 
 ## 原因
 
-TBD
+## 影响
 
-## 代价 / 风险
-
-TBD
-
-## 何时复审
-
-TBD
+## 后续

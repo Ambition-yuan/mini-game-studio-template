@@ -1,12 +1,5 @@
 # Changelog
 
-## [Unreleased]
+## Unreleased
 
-### Added
-- 初始化小游戏工作室模板。
-
-### Changed
-
-### Fixed
-
-### Known Issues
+- 初始化 Codex 小游戏工作室生产骨架。

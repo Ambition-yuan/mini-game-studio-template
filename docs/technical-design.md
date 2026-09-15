@@ -1,101 +1,58 @@
 # Technical Design
 
-## 1. 技术栈
+## 1. 架构目标
 
-- Cocos Creator：3.8.x（锁定具体版本）
-- TypeScript
-- 微信小游戏
-- 抖音小游戏
+核心游戏逻辑跨平台复用；平台差异集中封装。
 
-## 2. 逻辑分层
+## 2. 推荐目录
 
 ```text
-Gameplay / UI / Data
-        |
-   Services Layer
-        |
- Platform Adapter
-   /           \\
-WeChat       Douyin
+assets/
+├── scenes/
+├── prefabs/
+├── textures/
+├── animations/
+├── audio/
+├── resources/
+└── scripts/
+    ├── core/
+    ├── gameplay/
+    ├── ui/
+    ├── data/
+    ├── platform/
+    └── services/
 ```
 
-业务逻辑不得到处直接调用平台 API。
-
-## 3. 推荐代码结构
+## 3. 平台抽象
 
 ```text
-assets/scripts/
-├── core/
-├── gameplay/
-├── ui/
-├── data/
-├── platform/
-│   ├── IPlatform.ts
-│   ├── WeChatPlatform.ts
-│   └── DouyinPlatform.ts
-└── services/
-    ├── SaveService.ts
-    ├── AdService.ts
-    ├── AudioService.ts
-    └── AnalyticsService.ts
+PlatformManager
+ ├── WeChatPlatform
+ └── DouyinPlatform
 ```
 
-## 4. 平台接口
+## 4. 数据
 
-最小公共接口建议：
+关卡、奖励、数值、广告奖励等可调参数应配置化。
 
-- initialize()
-- showRewardAd()
-- vibrate()
-- getStorage()
-- setStorage()
-- share()（只有实际需要时实现）
+## 5. 存档
 
-## 5. 配置化
+首版优先本地存储；若产品确有跨设备/云存档需求，再评估平台云能力。
 
-优先配置化：
+## 6. 广告
 
-- 玩家属性
-- 关卡
-- 敌人
-- 道具
-- 奖励
-- 广告奖励
-- 冷却
-- 难度
-- 文案
+统一业务接口，例如：
 
-## 6. 资源策略
+```text
+RewardAdService.showRewardAd(reason): Promise<RewardResult>
+```
 
-- 首屏只加载必须资源。
-- 大量资源使用 Asset Bundle / 分包策略。
-- 图集、纹理尺寸和音频格式必须经过实际测量。
-- 平台包体限制以当前官方文档为准。
+业务层不得直接散落平台广告 API。
 
-## 7. 存档
+## 7. 构建/分包
 
-首版默认本地存储；只有明确的跨设备/联网需求才引入云存档。
+具体包体与分包策略以当前 Cocos + 微信 + 抖音官方文档和实际构建产物为准。
 
-## 8. 错误处理
+## 8. 日志
 
-平台 API 必须考虑：
-
-- 不支持
-- 回调失败
-- 超时
-- 用户取消
-- 网络失败
-- 生命周期切换
-
-## 9. 日志
-
-开发期日志分为：
-
-- game
-- platform
-- ad
-- save
-- analytics
-- error
-
-正式版本不得输出敏感信息。
+开发期可记录状态与回调；正式版本不得输出密钥、Token 等敏感信息。

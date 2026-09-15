@@ -1,31 +1,28 @@
-# OS / editor
-.DS_Store
-Thumbs.db
-.vscode/*
-!.vscode/settings.json
+# Cocos / Node / build
+node_modules/
+temp/
+library/
+local/
+profiles/
+cache/
+build/
+
+# IDE
+.vscode/*.log
 .idea/
 
-# Node
-node_modules/
+# OS
+.DS_Store
+Thumbs.db
 
-# Cocos generated/cache
-library/
-temp/
-local/
-build/
-profiles/
-
-# Generated platform projects / local outputs
-platforms/
-release/
-
-# Secrets / local env
+# Secrets
 .env
 .env.*
 !.env.example
-*.key
 *.pem
-*.p12
+*.key
+secrets/
 
-# Logs
-*.log
+# generated platform caches
+*/wechatgame/.devtools-cache/
+*/bytedance-mini-game/.cache/

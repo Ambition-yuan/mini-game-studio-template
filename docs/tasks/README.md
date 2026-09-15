@@ -1,31 +1,3 @@
 # Tasks
 
-每个任务建议使用下面模板。
-
-```md
-# TASK-YYYYMMDD-XXX：任务名称
-
-## Goal
-
-## Non-goals
-
-## Context
-
-## Acceptance Criteria
-
-- [ ] ...
-
-## Validation
-
-1. ...
-
-## Files likely involved
-
-- ...
-
-## Risks
-
-- ...
-```
-
-任务完成后，把关键结果沉淀到 roadmap / decision / changelog 中，而不是只留在聊天记录里。
+具体任务优先使用 GitHub Issues 管理；本目录只保存需要长期保留、与代码无关或需要结构化记录的任务材料。
