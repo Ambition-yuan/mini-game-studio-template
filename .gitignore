@@ -6,6 +6,7 @@ local/
 profiles/
 cache/
 build/
+artifacts/
 
 # IDE
 .vscode/*.log

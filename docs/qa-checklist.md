@@ -2,6 +2,24 @@
 
 状态值：PASS / FAIL / BLOCKED / NOT TESTED
 
+## Graybox 原型（Cocos Web）
+
+- Cocos Creator 3.8.8 资源导入：PASS
+- Web-mobile 构建：PASS
+- 首屏渲染：PASS
+- 商品选择：PASS
+- 合法移动：PASS
+- 撤回：PASS
+- 加货架：PASS
+- 打乱：PASS
+- 重开：PASS
+- 运行时控制台错误/警告：PASS
+- 第 5 关 `8 x 12` 移动端模拟布局：PASS，使用 `712 x 1272` 逻辑视口
+- Cocos 编辑器 GUI 人工预览：NOT TESTED
+- 微信 DevTools：NOT TESTED
+- 抖音 DevTools：NOT TESTED
+- 微信/抖音真机：NOT TESTED
+
 ## 启动
 - 首次启动
 - 二次启动

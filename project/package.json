@@ -1,0 +1,11 @@
+{
+  "name": "shelf-organizer",
+  "private": true,
+  "scripts": {
+    "test:domain": "node ./scripts/verify-domain.mjs"
+  },
+  "creator": {
+    "version": "3.8.8"
+  },
+  "uuid": "83585198-85b3-47e2-be12-6d29216ce192"
+}

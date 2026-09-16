@@ -1,6 +1,6 @@
 ---
 name: cocos-development
-description: 在 Cocos Creator 3.8.x + TypeScript 中实现小游戏功能、场景、Prefab、UI、动画、数据与性能优化。
+description: 在 Cocos Creator 3.8.8 + TypeScript 中实现小游戏功能、场景、Prefab、UI、动画、数据与性能优化。
 ---
 
 # Cocos Development
