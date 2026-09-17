@@ -2,7 +2,11 @@
   "name": "shelf-organizer",
   "private": true,
   "scripts": {
-    "test:domain": "node ./scripts/verify-domain.mjs"
+    "test:domain": "node ./scripts/verify-domain.mjs",
+    "wechat:build": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/build-wechat-release.ps1",
+    "wechat:apply-appid": "node ./scripts/apply-wechatgame-appid.mjs",
+    "wechat:capture-screenshot": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/capture-wechat-screenshot.ps1",
+    "wechat:pc-qa": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/verify-wechat-pc-remote.ps1"
   },
   "creator": {
     "version": "3.8.8"

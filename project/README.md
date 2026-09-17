@@ -40,3 +40,41 @@ npm run test:domain
 如果 `GameBootstrap` 显示 Missing Script，请保留编辑器生成的 `.meta` 文件，并把 Console 报错和 Scene 截图反馈给 Codex。
 
 Prefab 和正式视觉资源尚未创建。
+
+## 微信小游戏构建元数据
+
+在 `project/` 目录执行完整的微信 Release 构建：
+
+```powershell
+npm run wechat:build
+```
+
+该命令使用 `debug=false`，执行微信小游戏构建，并自动注入正式 AppID。构建日志写入 `artifacts/cocos-build-wechat-release.*.log`。
+
+如果只需要修正已有构建产物的 AppID，可执行：
+
+```powershell
+npm run wechat:apply-appid
+```
+
+脚本会读取 `config/wechatgame.json`，并修正 `build/wechatgame/project.config.json`。如需临时覆盖 AppID，可设置环境变量 `WECHAT_APP_ID`。
+
+如果微信开发者工具的 `simulator_screenshot` 工具不可用，可在项目窗口和模拟器已运行时执行：
+
+```powershell
+npm run wechat:capture-screenshot
+```
+
+该命令通过已注册的运行时自动化导出主画布，并写入 `artifacts/wechat-simulator-initial.png`。
+
+## 微信 PC 端真机批量回归（由用户执行）
+
+本流程属于用户真机测试。用户在微信开发者工具中连接 PC 端真机调试后，在 `project/` 目录执行：
+
+```powershell
+npm run wechat:pc-qa
+```
+
+脚本通过远程调试端口一次完成：重开、加货架、打乱、合法移动、撤回和 VConsole 检查，并将状态报告写入 `artifacts/wechat-pc-remote-core-regression.json`。脚本内截图可能因远程长连接回收而标记为 `BLOCKED`；此时可用独立短连接补拍 `artifacts/wechat-pc-remote-core-regression.png`，不影响核心功能回归结论。
+
+Codex 只维护脚本和测试步骤，不主动连接、发起或代替用户执行真机测试，也不要求用户回填结果；未收到失败反馈时按 `PASS（用户默认）` 处理。
