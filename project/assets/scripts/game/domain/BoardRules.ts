@@ -14,7 +14,8 @@ export type RuleFailure =
   | 'TARGET_FULL'
   | 'SAME_SHELF'
   | 'TOP_IS_NOT_BOX'
-  | 'NO_TOP_CONTENT';
+  | 'NO_TOP_CONTENT'
+  | 'SOURCE_SHELF_COMPLETED';
 
 export type RuleResult =
   | { readonly ok: true; readonly board: BoardState }
@@ -49,6 +50,26 @@ export function getOccupiedCount(shelf: ShelfState): number {
 
 export function getFreeSlotCount(shelf: ShelfState): number {
   return shelf.capacity - getOccupiedCount(shelf);
+}
+
+export function isCompletedMainShelf(shelf: ShelfState): boolean {
+  if (shelf.kind !== 'main' || shelf.slots.length !== shelf.capacity) {
+    return false;
+  }
+
+  const first = shelf.slots[0];
+  if (!first || first.hidden) {
+    return false;
+  }
+
+  for (let index = 1; index < shelf.slots.length; index += 1) {
+    const slot = shelf.slots[index];
+    if (!slot || slot.hidden || slot.itemTypeId !== first.itemTypeId) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 export function getTopGroup(
@@ -155,6 +176,9 @@ export function moveTopGroup(
   if (top.hidden) {
     return { ok: false, reason: 'SOURCE_TOP_IS_BOX' };
   }
+  if (isCompletedMainShelf(fromShelf)) {
+    return { ok: false, reason: 'SOURCE_SHELF_COMPLETED' };
+  }
 
   const targetTopIndex = getTopIndex(toShelf);
   if (targetTopIndex >= 0) {
@@ -214,6 +238,8 @@ export function moveTopGroup(
 }
 
 export function isWon(board: BoardState): boolean {
+  let hasEmptyMainShelf = false;
+
   for (const shelf of board.shelves) {
     const occupied: SlotContent[] = [];
     for (const slot of shelf.slots) {
@@ -231,6 +257,9 @@ export function isWon(board: BoardState): boolean {
     }
 
     if (shelf.kind === 'main') {
+      if (occupied.length === 0) {
+        hasEmptyMainShelf = true;
+      }
       const types = new Set(occupied.map((slot) => slot.itemTypeId));
       if (types.size > 1) {
         return false;
@@ -238,7 +267,7 @@ export function isWon(board: BoardState): boolean {
     }
   }
 
-  return true;
+  return hasEmptyMainShelf;
 }
 
 export function validateBoard(board: BoardState): string[] {

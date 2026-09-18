@@ -260,7 +260,7 @@ function replaceRandomItemsWithBoxes(
 function collectSolutionTokenIds(
   board: BoardState,
   solution: readonly PlannedMove[]
-): Set<string> {
+): Set<string> | null {
   let current = cloneBoard(board);
   const tokenIds = new Set<string>();
 
@@ -276,7 +276,6 @@ function collectSolutionTokenIds(
     if (!group || group.itemTypeId !== move.expectedItemTypeId) {
       throw new Error('Generated solution does not match its source board.');
     }
-
     for (let index = group.startIndex; index <= group.topIndex; index += 1) {
       const tokenId = source.slots[index]?.tokenId;
       if (tokenId) {
@@ -291,6 +290,9 @@ function collectSolutionTokenIds(
       move.expectedCount
     );
     if (!moved.ok) {
+      if (moved.reason === 'SOURCE_SHELF_COMPLETED') {
+        return null;
+      }
       throw new Error(`Generated solution move failed: ${moved.reason}.`);
     }
     current = moved.board;
@@ -350,6 +352,16 @@ function generateLevelInternal(
 
   const solution = [...forwardMoves].reverse();
   const eligibleTokenIds = collectSolutionTokenIds(board, solution);
+  if (!eligibleTokenIds) {
+    if (depth >= 16) {
+      throw new Error(
+        `Unable to generate a lock-compatible level ${config.id} with seed ${seed}.`
+      );
+    }
+
+    const nextSeed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return generateLevelInternal(config, nextSeed, depth + 1);
+  }
 
   let lastReason = 'No valid box placement was found.';
   for (let attempt = 0; attempt < 200; attempt += 1) {
@@ -441,7 +453,6 @@ export function verifyGeneratedLevel(
           reason: `Expected ${move.expectedItemTypeId}, found ${group.itemTypeId}.`
         };
       }
-
       const targetShelf = board.shelves.find(
         (shelf) => shelf.id === move.toShelfId
       );

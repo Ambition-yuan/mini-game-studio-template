@@ -45,6 +45,63 @@
 - 抖音 DevTools：NOT TESTED
 - 抖音真机：PASS（用户默认），由用户独立测试
 
+## Phase 4 正式内容
+
+- 流程状态与下一关领域测试：PASS，`npm run test:domain` 9/9
+- `home / playing / levelComplete` 状态边界：PASS
+- 最后一关边界：PASS，停留在已完成状态且不重新生成棋盘
+- Web-mobile 构建：PASS，Cocos builder 完成 `web-mobile` 任务
+- Web 运行：第 1 关通关后显示“下一关”：PASS
+- Web 运行：点击“下一关”进入第 2 关并隐藏该按钮：PASS
+- Web 运行 console warn/error：PASS，0 条
+- P4-01 截图证据：`artifacts/phase4-web-initial.png`、`artifacts/phase4-web-level-complete.png`、`artifacts/phase4-web-level-2.png`
+- P4-02 流程测试：PASS，10/10
+- 初始首页与开始游戏：PASS
+- 设置面板阻断棋盘输入：PASS
+- 设置继续游戏：PASS
+- 设置返回首页：PASS
+- 首页再次开始重新生成未完成关卡：PASS
+- 对局内重开重新生成当前关卡：PASS
+- P4-02 Web-mobile 构建：PASS
+- P4-02 Web 运行 console warn/error：PASS，0 条
+- P4-02 截图证据：`artifacts/phase4-p402-home.png`、`artifacts/phase4-p402-playing-1.png`、`artifacts/phase4-p402-settings.png`、`artifacts/phase4-p402-home-returned.png`、`artifacts/phase4-p402-playing-2.png`、`artifacts/phase4-p402-restarted.png`
+- P4-03 存档编解码与版本保护测试：PASS
+- P4-03 内存存档端口测试：PASS
+- P4-03 本地存储适配器注入测试：PASS
+- P4-03 控制器进度与设置保存测试：PASS
+- P4-03 音频设置开关运行回归：PASS
+- P4-03 Web-mobile 构建：PASS
+- P4-03 自动化浏览器刷新持久恢复：BLOCKED，内置浏览器不提供 `localStorage`
+- P4-03 截图证据：`artifacts/phase4-p403-settings-before.png`、`artifacts/phase4-p403-settings-after.png`、`artifacts/phase4-p403-settings-reopened.png`
+- P4-04 前置规则领域测试：PASS，`npm run test:domain` 15/15
+- 通关必须有至少一个全空主货架：PASS
+- 满同类主货架锁定与部分同类货架可移动：PASS
+- 默认及解锁后的缓冲货架容量为 1：PASS
+- 规则修订后 10 关各 100 个种子的生成与可解性验证：PASS
+- 规则修订 Web-mobile 构建：PASS，builder 完成 `web-mobile` 任务
+- 规则修订构建运行：PASS，首页与对局画面非空且切换后发生变化，console warn/error 为 0
+- 规则修订截图证据：`artifacts/rule-revision-preview.png`、`artifacts/rule-revision-playing.png`
+- P4-04 奖励广告与业务规则领域测试：PASS，`npm run test:domain` 19/19
+- Mock 广告四结果：PASS，覆盖 `completed / skipped / unavailable / failed`
+- 奖励结果映射：PASS，仅 `completed` 发放缓冲货架、撤回和打乱奖励
+- 缓冲货架奖励上限：PASS，最多 8 个且达到上限后不再请求广告
+- 广告输入锁与重复领奖保护：PASS
+- 基础关卡无广告完成：PASS
+- P4-04 Web-mobile 构建：PASS，builder 完成 `web-mobile` 任务
+- P4-04 Web 运行：PASS，首页可进入对局，console warn/error 为 0
+- P4-04 截图证据：`artifacts/p404-preview-start.png`、`artifacts/p404-preview-playing.png`
+- P4-05 领域回归：PASS，`npm run test:domain` 20/20，UI TypeScript 检查 PASS
+- P4-05 全流程回归：PASS，首页、设置、撤回、加货架、打乱、重开和 10 关推进均通过
+- P4-05 每关存档：PASS，每关完成后 `completedLevels` 和最高解锁关卡正确更新
+- P4-05 第 10 关边界：PASS，完成后保持通关状态且不重新生成棋盘
+- P4-05 打乱布局变化：PASS，极小关卡也会预检候选布局并在找不到不同布局时拒绝发奖
+- P4-05 真实 MVP 配置生成：PASS，10 关各 100 个种子的数量约束和可解回放通过
+- P4-05 Web-mobile 构建：PASS，builder 完成 `web-mobile` 任务
+- P4-05 Web 运行：PASS，首页进入对局后画面变化 46.12%，console warn/error 为 0
+- P4-05 领域报告：`artifacts/phase4-domain-regression.json`
+- P4-05 截图证据：`artifacts/p405-preview-home.png`、`artifacts/p405-preview-playing.png`
+- 生成器回放与点击整组移动等价性：BLOCKED，P2，需在 Release Candidate 前增加独立可执行路径求解或等价验证
+
 ## 启动
 - 首次启动
 - 二次启动
@@ -66,12 +123,12 @@
 - 异常退出恢复
 
 ## 广告
-- 加载成功
-- 加载失败
-- 用户取消
-- 未完整观看
-- 完整观看并领奖
-- 重复领奖保护
+- Mock 加载成功/失败/不可用：PASS
+- Mock 用户取消与未完整观看：PASS，统一按未发奖处理
+- Mock 完整观看并领奖：PASS
+- 重复领奖保护与播放期间输入锁：PASS
+- 微信真实激励视频：NOT TESTED，Phase 5 接入后验证
+- 抖音真实激励视频：NOT TESTED，Phase 5 接入后验证
 
 ## 生命周期
 - 切后台
